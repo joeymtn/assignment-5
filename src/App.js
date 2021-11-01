@@ -8,6 +8,7 @@ import {useStyles} from './useStyles';
 import EmailList from './EmailList';
 import MailboxList from './MailboxList';
 import TitleBar from './TitleBar';
+import {IsOpenContext} from './isOpenProvider'
 // const useStyles = makeStyles((theme) => ({
 //   root: {
 //     display: 'flex',
@@ -42,8 +43,6 @@ import TitleBar from './TitleBar';
 //     padding: theme.spacing(3),
 //   },
 // }));
-
-const isOpenContext = React.createContext();
 /**
  *
  * @param {*} props
@@ -53,11 +52,11 @@ function App(props) {
   const {window} = props;
   const classes = useStyles();
   const theme = useTheme();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  // const [mobileOpen, setMobileOpen] = React.useState(false);
   // const [mailbox, setMailBox] = React.useState('Inbox');
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
+  // const handleDrawerToggle = () => {
+  //   setMobileOpen(!mobileOpen);
+  // };
   const container = window !== undefined ? () =>
     window().document.body : undefined;
 
@@ -65,11 +64,10 @@ function App(props) {
     <div className={classes.root}>
       <CssBaseline />
       <TitleBar/>
-      <isOpenContext.Provider value = {{mobileOpen, handleDrawerToggle}}>
-        <nav className={classes.drawer} aria-label="mailbox folders">
-          {/* The implementation can be swapped with
+      <nav className={classes.drawer} aria-label="mailbox folders">
+        {/* The implementation can be swapped with
         js to avoid SEO duplication of links. */}
-          <Hidden smUp implementation="css">
+        <Hidden smUp implementation="css">
             <Drawer
               container={container}
               variant="temporary"
@@ -84,24 +82,23 @@ function App(props) {
               }}
             > <MailboxList/>
             </Drawer>
-          </Hidden>
-          <Hidden xsDown implementation="css">
-            <Drawer
-              classes={{
-                paper: classes.drawerPaper,
-              }}
-              variant="permanent"
-              open
-            >
-              <MailboxList/>
-            </Drawer>
-          </Hidden>
-        </nav>
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
-          <EmailList/>
-        </main>
-      </isOpenContext.Provider>
+        </Hidden>
+        <Hidden xsDown implementation="css">
+          <Drawer
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            variant="permanent"
+            open
+          >
+            <MailboxList/>
+          </Drawer>
+        </Hidden>
+      </nav>
+      <main className={classes.content}>
+        <div className={classes.toolbar} />
+        <EmailList/>
+      </main>
     </div>
   );
 }
