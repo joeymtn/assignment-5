@@ -1,23 +1,21 @@
-import {useStyles} from './useStyles';
+// import {useStyles} from './useStyles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import {isOpenContext} from './isOpenProvider';
+import mailContext from './mailContext';
 // eslint-disable-next-line valid-jsdoc
 /**
  * return {*}
  */
 function TitleBar() {
-  const classes = useStyles();
-  
   return (
-    <isOpenContext.Consumer>
-      {({mobileOpen, handleDrawerToggle}) => (
+    <mailContext.Consumer>
+      {({mobileOpen, handleDrawerToggle, classes}) => (
         <AppBar position="fixed"
           className={classes.appBar}
-          zIndex={classes.appBar.zIndex}
+          style={{zIndex: 10000}}
         >
           <Toolbar>
             <IconButton
@@ -35,7 +33,7 @@ function TitleBar() {
           </Toolbar>
         </AppBar>
       )}
-    </isOpenContext.Consumer>
+    </mailContext.Consumer>
   );
 }
 export default TitleBar;
