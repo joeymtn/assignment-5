@@ -1,9 +1,10 @@
-import { useDimensions } from "./DimensionProvider"; 
+// import {useDimensions} from './DimensionProvider';
 
-const ResponsiveLayout = ({ breakPoint  = 414, renderNarrow, renderDefault}) => {
-    const {width} = useDimensions() 
-    return width > breakPoint ? renderDefault() : renderNarrow()
-} 
+const ResponsiveLayout = ({breakPoint = 414, renderNarrow, renderDefault}) => {
+  // const width = useDimensions();
+  const width = 500;
+  return width > breakPoint ? renderDefault() : renderNarrow();
+};
 
 
-export default ResponsiveLayout
+export default ResponsiveLayout;
