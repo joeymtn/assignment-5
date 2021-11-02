@@ -12,7 +12,7 @@ import mailContext from './mailContext';
 function TitleBar() {
   return (
     <mailContext.Consumer>
-      {({mobileOpen, handleDrawerToggle, classes}) => (
+      {({mobileOpen, handleDrawerToggle, classes, mailbox}) => (
         <AppBar position="fixed"
           className={classes.appBar}
           style={{zIndex: 10000}}
@@ -28,7 +28,7 @@ function TitleBar() {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap>
-            CSE 183 Mail - inbox
+            CSE 183 Mail - {mailbox}
             </Typography>
           </Toolbar>
         </AppBar>

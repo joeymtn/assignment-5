@@ -1,7 +1,7 @@
 import React from 'react';
 import loader from './data/loader';
 import emails from './data/emails.json';
-
+import mailContext from './mailContext';
 loader(); // do not remove this!
 
 /**
@@ -14,18 +14,23 @@ loader(); // do not remove this!
  */
 function EmailList() {
   return (
-    <table>
-      <tbody>
-        {emails.map((email) => (
-          <tr key={email.id}>
-            <td>{email.from.name}</td>
-            <td>{email.subject}</td>
-            <td>{email.received}</td>
-            <td>{email.mailbox}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <mailContext.Consumer>
+      {({mailbox}) => (
+        <table>
+          <tbody>
+            {emails.filter((email) => email.mailbox === mailbox.toLowerCase())
+              .map((email) => (
+                <tr key={email.id}>
+                  <td>{email.from.name}</td>
+                  <td>{email.subject}</td>
+                  <td>{email.received}</td>
+                  <td>{email.mailbox}</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      )}
+    </mailContext.Consumer>
   );
 }
 

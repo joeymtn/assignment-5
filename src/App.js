@@ -1,8 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
-import Hidden from '@material-ui/core/Hidden';
 // import {useStyles} from './useStyles';
 import EmailList from './EmailList';
 import MailboxList from './MailboxList';
@@ -15,14 +14,14 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   drawer: {
-    zIndex: '10',
+    zIndex: 10,
     [theme.breakpoints.up('sm')]: {
       width: drawerWidth,
       flexShrink: 0,
     },
   },
   appBar: {
-    zIndex: '10000',
+    zIndex: 10000,
     [theme.breakpoints.up('sm')]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
@@ -53,14 +52,16 @@ function App(props) {
   const {window} = props;
   const classes = useStyles();
   const theme = useTheme();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  // const [mailbox, setMailBox] = React.useState('Inbox');
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mailbox, setMailBox] = useState('Inbox');
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
   const container = window !== undefined ? () =>
     window().document.body : undefined;
   const obj = {
+    mailbox,
+    setMailBox,
     classes,
     mobileOpen,
     setMobileOpen,
@@ -75,7 +76,6 @@ function App(props) {
         <nav className={classes.drawer} aria-label="mailbox folders">
           {/* The implementation can be swapped with
         js to avoid SEO duplication of links. */}
-          <Hidden smUp implementation="css">
             <Drawer
               container={container}
               variant="temporary"
@@ -90,8 +90,6 @@ function App(props) {
               }}
             > <MailboxList/>
             </Drawer>
-          </Hidden>
-          <Hidden xsDown implementation="css">
             <Drawer
               classes={{
                 paper: classes.drawerPaper,
@@ -101,7 +99,6 @@ function App(props) {
             >
               <MailboxList/>
             </Drawer>
-          </Hidden>
         </nav>
         <main className={classes.content}>
           <div className={classes.toolbar} />
