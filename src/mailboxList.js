@@ -26,7 +26,7 @@ function MailboxList() {
                   )}
                 </ListItemIcon>
                 <ListItemText primary={text} onClick={(e) => {
-                  setMailBox(e.target.innerText);
+                  setMailBox(e.target.innerHTML);
                 }} />
               </ListItem>
             ))}

@@ -6,6 +6,8 @@ import MailboxList from './MailboxList';
 import TitleBar from './TitleBar';
 import mailContext from './mailContext';
 import {makeStyles, useTheme} from '@material-ui/core/styles';
+/* eslint-disable-next-line no-unused-vars */
+import MailViewer from './MailViewer';
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,7 +40,23 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
+    width: '100%',
     padding: theme.spacing(3),
+  },
+  emailViewer: {
+    /** referenced from @mm20 on discord */
+    position: 'fixed', left: '50%', top: '10%',
+    width: '300%',
+    height: 1000000,
+    flexGrow: 1,
+    padding: theme.spacing(3),
+  },
+  table: {
+    minWidth: 650,
+    height: '50%',
+  },
+  mailViewerBar: {
+    backgroundColor: '#1155ff',
   },
 }));
 /**
@@ -47,11 +65,12 @@ const useStyles = makeStyles((theme) => ({
  * @return {*} obj
  */
 function Content(props) {
-  const {window, styles} = props;
-  console.log(styles);
+  const {window} = props;
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [openViewer, setOpenViewer] = useState(false);
+  const [clickedEmail, setClickedEmail] = useState();
   const [mailbox, setMailBox] = useState('Inbox');
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -59,6 +78,10 @@ function Content(props) {
   const container = window !== undefined ? () =>
     window().document.body : undefined;
   const obj = {
+    clickedEmail,
+    setClickedEmail,
+    openViewer,
+    setOpenViewer,
     mailbox,
     setMailBox,
     classes,
@@ -96,11 +119,13 @@ function Content(props) {
             open
           >
             <MailboxList/>
+            {}
           </Drawer>
         </nav>
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <EmailList/>
+          {clickedEmail ? <MailViewer/> : null}
         </main>
       </mailContext.Provider>
     </div>

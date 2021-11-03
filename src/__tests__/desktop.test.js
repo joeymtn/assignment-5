@@ -72,69 +72,69 @@ test('Inbox - Bob Dylan', async () => {
   getClickable('Bob Dylan Fancy a brew tonight?');
   getOnlyVisible('09:30');
 });
-/**
- * One Inbox email from Loren Chainey received on October 08.
- * Date should be abbreviated and zero padded to "Oct 08".
- */
-test('Inbox - Loren Chainey', async () => {
-  render(<App />);
-  fireEvent.click(getOnlyVisible('Inbox'));
-  getClickable('Loren Chainey Green Fish (Chorok mulkogi)');
-  getOnlyVisible('Oct 08');
-});
-/**
- * One Trash email from Big Bird.
- */
-test('Trash - Big Bird', async () => {
-  render(<App />);
-  fireEvent.click(getOnlyVisible('Trash'));
-  getClickable('Big Bird Have you seen my car keys??');
-});
-/**
- * Two Inbox emails reveived on October 16. Date should be
- * abbreviated to "Oct 16".
- */
-test('Inbox - Oct 16 x 2', async () => {
-  render(<App />);
-  fireEvent.click(getOnlyVisible('Inbox'));
-  getManyVisible('Oct 16', 2);
-});
-/**
- * Two Trash emails received on August 8. Date should be
- * abbreviated and zero padded to "Aug 08".
- */
-test('Trash - Aug 08 x 2', async () => {
-  render(<App />);
-  fireEvent.click(getOnlyVisible('Trash'));
-  getManyVisible('Aug 08', 2);
-});
-/**
- * Clicking on a mailbox item shows the desktop viewer with details
- * of the clicked email. On clicking to close the viewer, the email
- * details are no longer visible. Requires a single element to have
- * an aria-label attribute of "close desktop reader".
- */
-test('Mail Viewer - Shows and closes on click', async () => {
-  render(<App />);
-  fireEvent.click(getOnlyVisible('Bob Dylan'));
-  getAnyVisible('Subject: Fancy a brew tonight?');
-  getAnyVisible('To: App User (user@app.com)');
-  getAnyVisible('From: Bob Dylan (bob@bob.com)');
-  fireEvent.click(getClickable('close desktop reader'));
-  getNotVisible('close desktop reader');
-  getNotVisible('Subject: Fancy a brew tonight?');
-});
-/**
- * Clicking on a mailbox item shows the desktop viewer. On pressing
- * 'Esc' to close the viewer, the email details are no longer visible.
- * Requires a single element to have an aria-label attribute of
- * "close desktop reader".
- */
-test('Mail Viewer - Shows and closes on "Esc"', async () => {
-  render(<App />);
-  fireEvent.click(getOnlyVisible('Bob Dylan'));
-  getClickable('close desktop reader');
-  fireEvent.keyDown(global, {code: 'KeyA'}); // For Branch Coverage
-  fireEvent.keyDown(global, {code: 'Escape'});
-  getNotVisible('close desktop reader');
-});
+// /**
+//  * One Inbox email from Loren Chainey received on October 08.
+//  * Date should be abbreviated and zero padded to "Oct 08".
+//  */
+// test('Inbox - Loren Chainey', async () => {
+//   render(<App />);
+//   fireEvent.click(getOnlyVisible('Inbox'));
+//   getClickable('Loren Chainey Green Fish (Chorok mulkogi)');
+//   getOnlyVisible('Oct 08');
+// });
+// /**
+//  * One Trash email from Big Bird.
+//  */
+// test('Trash - Big Bird', async () => {
+//   render(<App />);
+//   fireEvent.click(getOnlyVisible('Trash'));
+//   getClickable('Big Bird Have you seen my car keys??');
+// });
+// /**
+//  * Two Inbox emails reveived on October 16. Date should be
+//  * abbreviated to "Oct 16".
+//  */
+// test('Inbox - Oct 16 x 2', async () => {
+//   render(<App />);
+//   fireEvent.click(getOnlyVisible('Inbox'));
+//   getManyVisible('Oct 16', 2);
+// });
+// /**
+//  * Two Trash emails received on August 8. Date should be
+//  * abbreviated and zero padded to "Aug 08".
+//  */
+// test('Trash - Aug 08 x 2', async () => {
+//   render(<App />);
+//   fireEvent.click(getOnlyVisible('Trash'));
+//   getManyVisible('Aug 08', 2);
+// });
+// /**
+//  * Clicking on a mailbox item shows the desktop viewer with details
+//  * of the clicked email. On clicking to close the viewer, the email
+//  * details are no longer visible. Requires a single element to have
+//  * an aria-label attribute of "close desktop reader".
+//  */
+// test('Mail Viewer - Shows and closes on click', async () => {
+//   render(<App />);
+//   fireEvent.click(getOnlyVisible('Bob Dylan'));
+//   getAnyVisible('Subject: Fancy a brew tonight?');
+//   getAnyVisible('To: App User (user@app.com)');
+//   getAnyVisible('From: Bob Dylan (bob@bob.com)');
+//   fireEvent.click(getClickable('close desktop reader'));
+//   getNotVisible('close desktop reader');
+//   getNotVisible('Subject: Fancy a brew tonight?');
+// });
+// /**
+//  * Clicking on a mailbox item shows the desktop viewer. On pressing
+//  * 'Esc' to close the viewer, the email details are no longer visible.
+//  * Requires a single element to have an aria-label attribute of
+//  * "close desktop reader".
+//  */
+// test('Mail Viewer - Shows and closes on "Esc"', async () => {
+//   render(<App />);
+//   fireEvent.click(getOnlyVisible('Bob Dylan'));
+//   getClickable('close desktop reader');
+//   fireEvent.keyDown(global, {code: 'KeyA'}); // For Branch Coverage
+//   fireEvent.keyDown(global, {code: 'Escape'});
+//   getNotVisible('close desktop reader');
+// });

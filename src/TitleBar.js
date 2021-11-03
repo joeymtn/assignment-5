@@ -28,7 +28,7 @@ function TitleBar() {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap>
-            CSE 183 Mail - {mailbox}
+            CSE183 Mail - {mailbox}
             </Typography>
           </Toolbar>
         </AppBar>
