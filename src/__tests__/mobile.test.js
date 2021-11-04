@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
 import {render, fireEvent} from '@testing-library/react';
 import '@testing-library/jest-dom';
+/* eslint-disable no-unused-vars */
 import {getOnlyVisible, getClickable,
   getNotVisible, setNarrow} from './common';
 import App from '../App';

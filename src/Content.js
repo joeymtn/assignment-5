@@ -39,24 +39,25 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
   },
   content: {
-    flexGrow: 1,
     width: '100%',
     padding: theme.spacing(3),
   },
   emailViewer: {
     /** referenced from @mm20 on discord */
-    position: 'fixed', left: '50%', top: '10%',
-    width: '300%',
-    height: 1000000,
-    flexGrow: 1,
+    position: 'fixed',
+    width: `calc(100% - ${drawerWidth}px)`,
+    height: '100%',
+    left: 0,
+    bottom: 0,
     padding: theme.spacing(3),
   },
   table: {
     minWidth: 650,
-    height: '50%',
+    height: '20%',
   },
   mailViewerBar: {
     backgroundColor: '#1155ff',
+    height: '20%',
   },
 }));
 /**
@@ -119,13 +120,12 @@ function Content(props) {
             open
           >
             <MailboxList/>
-            {}
           </Drawer>
         </nav>
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <EmailList/>
-          {clickedEmail ? <MailViewer/> : null}
+          {openViewer ? <MailViewer/> : null}
         </main>
       </mailContext.Provider>
     </div>

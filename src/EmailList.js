@@ -17,9 +17,14 @@ const dateFormatter = (date) => {
   const cToday = new Date();
   cToday.setMonth(-12);
   if (isToday(d)) {
-    return `${d.getHours()}:${d.getMinutes()}`;
+    let s = `${d.toLocaleString('en-US', {hour: '2-digit', minute: '2-digit',
+      hour12: 'false'})}`;
+    s = s.replace('AM', '');
+    console.log(s);
+    return s;
   } else if (d.getTime() > cToday.getTime()) {
-    return `${d.toLocaleString('default', {month: 'long'})}, ${d.getDate()}`;
+    return `${d.toLocaleString('default', {month: 'short'})}
+     ${d.toLocaleString('en-US', {day: '2-digit'})}`;
   } else {
     return `${d.getFullYear()}`;
   }
@@ -46,7 +51,9 @@ function EmailList() {
                   return new Date(b.received) - new Date(a.received);
                 },
               ).map((email) => (
-                <tr key={email.id} onClick={() => {
+                <tr key={email.id} aria-label= {`${email.from.name} 
+                ${email.subject}`}
+                role='button' onClick={() => {
                   console.log('clicked'); setOpenViewer(true);
                   setClickedEmail(email);
                 }}>
