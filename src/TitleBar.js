@@ -20,12 +20,15 @@ function TitleBar() {
           <Toolbar>
             <IconButton
               color="inherit"
-              aria-label="open drawer"
+              aria-label="toggle drawer"
               edge="start"
-              onClick={handleDrawerToggle}
+              onClick={() => {
+                console.log('menu clicked');
+                handleDrawerToggle();
+              }}
               className={classes.menuButton}
             >
-              <MenuIcon />
+              <MenuIcon/>
             </IconButton>
             <Typography variant="h6" noWrap>
             CSE183 Mail - {mailbox}

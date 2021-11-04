@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 import {Paper} from '@material-ui/core';
 import {ListItemIcon} from '@material-ui/core';
 import mailContext from './mailContext';
@@ -11,14 +12,15 @@ import List from '@material-ui/core/List';
 function MailViewer() {
   return (
     <mailContext.Consumer>
-      {({mailbox, clickedEmail, classes, setOpenViewer}) => (
+      {({mailbox, clickedEmail, classes, setOpenViewer, isMobile}) => (
         <div>
           <Paper className = {classes.MailViewer}>
-            <List component ="nav" class = {classes.mailViewerBar}
+            <List component ="nav" className = {classes.mailViewerBar}
             >
               <ListItemIcon role="button" className = {classes.mailViewerBar}>
                 <IconButton edge="end"
-                  aria-label = "close desktop reader"
+                  aria-label = {isMobile ? "close mobile reader":
+                    "close desktop reader"}
                   onClick={()=> {
                     setOpenViewer(false);
                   }}

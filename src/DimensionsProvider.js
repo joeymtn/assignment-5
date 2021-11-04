@@ -1,6 +1,5 @@
 import React, {createContext, useContext, useState, useEffect} from 'react';
-const DimensionsContext = createContext();
-
+const dimensionsContext = createContext();
 const winDims = () => ({
   height: window.innerHeight,
   width: window.innerWidth,
@@ -18,14 +17,14 @@ const DimensionsProvider = ({children}) => {
     };
   }, []);
   return (
-    <DimensionsContext.Provider value={dimensions}>
+    <dimensionsContext.Provider value={dimensions}>
       {children}
-    </DimensionsContext.Provider>
+    </dimensionsContext.Provider>
   );
 };
 
 export default DimensionsProvider;
 
 export const useDimensions = () => {
-  return useContext(DimensionsContext);
+  return useContext(dimensionsContext);
 };
