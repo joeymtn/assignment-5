@@ -12,7 +12,7 @@ import mailContext from './mailContext';
 function MailboxList() {
   return (
     <mailContext.Consumer>
-      {({classes, setMailBox, setOpenViewer}) => (
+      {({classes, setMailBox, setOpenViewer, setMobileOpen}) => (
         <div>
           <div className={classes.toolbar} />
           <List>
@@ -28,6 +28,7 @@ function MailboxList() {
                 <ListItemText primary={text} onClick={(e) => {
                   setMailBox(e.target.innerHTML);
                   setOpenViewer(false);
+                  setMobileOpen(false);
                 }} />
               </ListItem>
             ))}

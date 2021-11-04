@@ -61,57 +61,6 @@ const desktopStyle = makeStyles((theme) => ({
     height: '20%',
   },
 }));
-const mobileStyle = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-  },
-  drawer: {
-    zIndex: 100000,
-    [theme.breakpoints.up('sm')]: {
-      width: drawerWidth,
-      flexShrink: 0,
-    },
-  },
-  appBar: {
-    zIndex: 10,
-    [theme.breakpoints.up('sm')]: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
-    },
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
-      display: 'none',
-    },
-  },
-  // necessary for content to be below app bar
-  toolbar: theme.mixins.toolbar,
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  content: {
-    width: '100%',
-    padding: theme.spacing(3),
-  },
-  emailViewer: {
-    /** referenced from @mm20 on discord */
-    position: 'fixed',
-    width: `calc(100% - ${drawerWidth}px)`,
-    height: '100%',
-    left: 0,
-    bottom: 0,
-    padding: theme.spacing(3),
-  },
-  table: {
-    minWidth: 650,
-    height: '100%',
-  },
-  mailViewerBar: {
-    backgroundColor: '#1155ff',
-    height: '20%',
-  },
-}));
 /**
  *
  * @param {*} props
@@ -119,7 +68,7 @@ const mobileStyle = makeStyles((theme) => ({
  */
 function Content(props) {
   // const {window} = props;
-  console.log(props);
+
   const classes = desktopStyle();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -134,6 +83,7 @@ function Content(props) {
   //   window().document.body : undefined;
   const obj = {
     isMobile,
+    setMobile,
     clickedEmail,
     setClickedEmail,
     openViewer,
@@ -156,7 +106,6 @@ function Content(props) {
           <Drawer
             container={window.document.body}
             variant="temporary"
-            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
             open={mobileOpen}
             onClose={handleDrawerToggle}
             classes={{

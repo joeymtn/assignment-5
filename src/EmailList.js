@@ -5,6 +5,7 @@ import mailContext from './mailContext';
 import Paper from '@material-ui/core/Paper';
 import TableContainer from '@material-ui/core/TableContainer';
 loader(); // do not remove this!
+loader();
 // https://attacomsian.com/blog/check-if-date-is-today-javascript
 const isToday = (date) => {
   const today = new Date();
@@ -20,13 +21,10 @@ const dateFormatter = (date) => {
     let s = `${d.toLocaleString('en-US', {hour: '2-digit', minute: '2-digit',
       hour12: 'false'})}`;
     s = s.replace('AM', '');
-    console.log(s);
     return s;
-  } else if (d.getTime() > cToday.getTime()) {
+  } else {
     return `${d.toLocaleString('default', {month: 'short'})}
      ${d.toLocaleString('en-US', {day: '2-digit'})}`;
-  } else {
-    return `${d.getFullYear()}`;
   }
 };
 // https://stackoverflow.com/questions/10123953/how-to-sort-an-object-array-by-date-property
@@ -54,7 +52,7 @@ function EmailList() {
                 <tr key={email.id} aria-label= {`${email.from.name} 
                 ${email.subject}`}
                 role='button' onClick={() => {
-                  console.log('clicked'); setOpenViewer(true);
+                  setOpenViewer(true);
                   setClickedEmail(email);
                 }}>
                   <td>{email.from.name}</td>
